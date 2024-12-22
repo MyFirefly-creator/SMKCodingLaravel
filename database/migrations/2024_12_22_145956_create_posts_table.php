@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('KategoriID');
             $table->timestamps();
 
+            // Foreign keys
             $table->foreign('UserID')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('KategoriID')->references('id')->on('kategoris')->onDelete('cascade');
         });
@@ -29,6 +30,11 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('posts', function (Blueprint $table) {
+            $table->dropForeign(['UserID']);
+            $table->dropForeign(['KategoriID']);
+        });
+
         Schema::dropIfExists('posts');
     }
 };

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('UserID');
             $table->timestamps();
 
+            // Foreign key
             $table->foreign('UserID')->references('id')->on('users')->onDelete('cascade');
         });
     }
@@ -26,6 +27,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('kategoris', function (Blueprint $table) {
+            $table->dropForeign(['UserID']);
+        });
+
         Schema::dropIfExists('kategoris');
     }
 };

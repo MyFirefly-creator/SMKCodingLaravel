@@ -7,7 +7,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', [UserController::class, 'index'])->name('index');
+Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');
 Route::get('sesi/register', [UserController::class, 'formRegister'])->name('formRegister');
 Route::post('/register', [UserController::class, 'register'])->name('register');
 Route::get('sesi/login', [UserController::class, 'formLogin'])->name('formLogin');
