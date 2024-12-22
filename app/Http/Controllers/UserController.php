@@ -30,9 +30,11 @@ class UserController extends Controller
         User::create([
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
-            'name' => $validated['nama'],
+            'name' => $validated['name'],
             'role' => 'user',
         ]);
+
+        return redirect()->route('index')->with('success', 'Berhasil Registrasi.');
     }
 
     public function formLogin()
