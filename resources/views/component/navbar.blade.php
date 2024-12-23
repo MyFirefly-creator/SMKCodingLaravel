@@ -12,14 +12,27 @@
                     <a class="nav-link" href="{{ route('dashboard') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">Galeri</a>
+                    <a class="nav-link" href="{{ route('kategori.index') }}">Kategori</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">Foto</a>
+                    <a class="nav-link" href="{{ route('post.index') }}">Post</a>
                 </li>
-                @if(Auth::user() && Auth::user()->role === 'admin')
+
+                @if(Auth::check())
                     <li class="nav-item">
-                        <a class="nav-link text-danger" href="">Admin</a>
+                        <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                            @csrf
+                            <button class="btn btn-link nav-link" type="submit">Logout</button>
+                        </form>
+                    </li>
+                    @if(Auth::user()->role === 'admin')
+                        <li class="nav-item">
+                            <a class="nav-link text-danger" href="#">Admin</a>
+                        </li>
+                    @endif
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('formLogin') }}">Login</a>
                     </li>
                 @endif
             </ul>

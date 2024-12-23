@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -11,8 +12,15 @@ class UserController extends Controller
 {
     public function index()
     {
-        return view('dashboard.index');
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Anda harus login untuk mengakses halaman ini.');
+        }
+
+        $images = Post::orderBy('id', 'asc')->paginate(10);
+
+        return view('dashboard.index', compact('images'));
     }
+
 
     public function formRegister()
     {
@@ -34,7 +42,7 @@ class UserController extends Controller
             'role' => 'user',
         ]);
 
-        return redirect()->route('index')->with('success', 'Berhasil Registrasi.');
+        return redirect()->route('dashboard')->with('success', 'Berhasil Registrasi.');
     }
 
     public function formLogin()
@@ -50,13 +58,13 @@ class UserController extends Controller
         ]);
 
         if (Auth::attempt(['email' => $validated['email'], 'password' => $validated['password']])) {
-            return redirect()->route('index')->with('success', 'Selamat Datang');
+            return redirect()->route('dashboard')->with('success', 'Selamat Datang');
         }
     }
 
     public function logout(Request $request)
     {
         Auth::logout();
-        return redirect()->route('sesi.login')->with('success', 'Anda telah logout.');
+        return redirect()->route('dashboard')->with('success', 'Anda telah logout.');
     }
 }
