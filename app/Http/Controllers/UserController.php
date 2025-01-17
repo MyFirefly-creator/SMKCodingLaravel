@@ -13,7 +13,7 @@ class UserController extends Controller
     public function index()
     {
         if (!Auth::check()) {
-            return redirect()->route('login')->with('error', 'Anda harus login untuk mengakses halaman ini.');
+            return redirect()->route('formLogin')->with('error', 'Anda harus login untuk mengakses halaman ini.');
         }
 
         $images = Post::orderBy('id', 'asc')->paginate(10);
@@ -65,6 +65,6 @@ class UserController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
-        return redirect()->route('dashboard')->with('success', 'Anda telah logout.');
+        return redirect()->route('formLogin')->with('success', 'Anda telah logout.');
     }
 }
