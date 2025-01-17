@@ -37,7 +37,7 @@ class PostController extends Controller
         }
 
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:10240',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:20480',
             'konten' => 'required|string|max:255',
             'kategori_id' => 'required|exists:kategoris,id',
         ]);
@@ -76,7 +76,7 @@ class PostController extends Controller
         }
 
         $request->validate([
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:20480',
             'konten' => 'required|string|max:255',
             'kategori_id' => 'required|exists:kategoris,id',
         ]);
