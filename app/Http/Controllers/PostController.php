@@ -39,6 +39,8 @@ class PostController extends Controller
         $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:20480',
             'konten' => 'required|string|max:255',
+            'deskripsi' => 'required|string',
+            'isi_deskripsi' => 'required|string',
             'kategori_id' => 'required|exists:kategoris,id',
         ]);
 
@@ -47,6 +49,8 @@ class PostController extends Controller
         Post::create([
             'image' => $imagePath,
             'konten' => $request->konten,
+            'deskripsi' => $request->deskripsi,
+            'isi_deskripsi' => $request->isi_deskripsi,
             'UserID' => Auth::id(),
             'KategoriID' => $request->kategori_id,
         ]);
@@ -78,6 +82,8 @@ class PostController extends Controller
         $request->validate([
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:20480',
             'konten' => 'required|string|max:255',
+            'deskripsi' => 'required|string',
+            'isi_deskripsi' => 'required|string',
             'kategori_id' => 'required|exists:kategoris,id',
         ]);
 
@@ -95,6 +101,8 @@ class PostController extends Controller
         $image->update([
             'image' => $imagePath,
             'konten' => $request->konten,
+            'deskripsi' => $request->deskripsi,
+            'isi_deskripsi' => $request->isi_deskripsi,
             'UserID' => Auth::id(),
             'KategoriID' => $request->kategori_id,
         ]);

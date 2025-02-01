@@ -16,7 +16,9 @@ class Post extends Model
     protected $fillable = [
         'image',
         'konten',
+        'deskripsi',
         'UserID',
+        'isi_deskripsi',
         'KategoriID',
     ];
 

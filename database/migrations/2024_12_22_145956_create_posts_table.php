@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('image');
             $table->string('konten');
+            $table->text('deskripsi');
+            $table->text('isi_deskripsi');
             $table->unsignedBigInteger('UserID');
             $table->unsignedBigInteger('KategoriID');
             $table->timestamps();
